@@ -58,7 +58,7 @@ const Updateperson =async(req,res)=>{
 }
 //model.remove()
 const deletePersonByName = async(req, res)=>{
-    await person.remove({name:"sana"})
+    await person.deleteOne ({name:"sana"})
     .then((doc)=>{
         res.status(200).json({msg: 'removed with succes', doc})
     })
@@ -67,16 +67,16 @@ const deletePersonByName = async(req, res)=>{
 })
 }
 //findByIdAndRemove
-// const removeperson =async(req,res)=>{
+const removeperson =async(req,res)=>{
     
-//     await person.findByIdAndRemove({_id:"66258aa272df5185ae2e24e6"})
-//     .then((doc)=>{
-//         res.status(200).json({msg: 'person removed with succes', doc})
-//     })
-// .catch((err)=>{
-//     res.status(500).json({msg:'Internal server error', err})
-// })
-// }
+    await person.findByIdAndDelete("66258aa272df5185ae2e24e6")
+    .then((doc)=>{
+        res.status(200).json({msg: 'person removed with succes', doc})
+    })
+.catch((err)=>{
+    res.status(500).json({msg:'Internal server error', err})
+})
+}
 
 // const persones = new userSchema({
 //         name: "person",
@@ -114,4 +114,4 @@ const deletePersonByName = async(req, res)=>{
 //         ];
 
 
-        module.exports = {createPerson, fetchData , personOne, findPersonById,Updateperson,deletePersonByName}
+        module.exports = {createPerson, fetchData , personOne, findPersonById,Updateperson,deletePersonByName,removeperson}
